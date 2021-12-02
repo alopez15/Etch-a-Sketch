@@ -1,0 +1,17 @@
+
+#gridContainer{
+    border: solid black;
+    display: grid;
+    width: 40%;
+    padding: 0;
+    
+}
+
+
+#gridContainer div{
+    border: solid black;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 60px;
+}
