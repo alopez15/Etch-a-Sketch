@@ -1,9 +1,13 @@
 const gridContainer = document.querySelector("#grid-container");
 const clearButton = document.querySelector("#clear-button")
 const gridCells = document.querySelector('#grid-container').getElementsByTagName('div')
+const colorPicker = document.querySelector('#color-picker')
+const rainbowBtn = document.querySelector('#rainbow-button')
 
-let size = 10;
+let size = 32;
 let penStatus = false;
+let color = 'black'
+
 
 function setGrid(size) {
   gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
@@ -13,6 +17,28 @@ function setGrid(size) {
     const gridDiv = document.createElement("div");
     gridContainer.append(gridDiv);
   }
+}
+
+function clearGrid(){
+  let allCells = 0;
+  for (let i = 0; i < gridCells.length; i++){
+    allCells = i;
+    gridCells[allCells].style.backgroundColor = 'white'
+  }
+}
+
+function activatePen(e) {
+  e.target.style.backgroundColor = color;
+}
+
+function changeColor(e){
+  color = e.target.value
+}
+
+function rainbowMode(){
+  let red = Math.floor((math.random() * 255))
+  let green = Math.floor((math.random() * 255))
+  let blue = Math.floor((math.random() * 255))
 }
 
 gridContainer.addEventListener("click", (e) => {
@@ -27,21 +53,11 @@ gridContainer.addEventListener("click", (e) => {
   }
 });
 
-function activatePen(div) {
-  div.target.style.backgroundColor = "black";
-}
+colorPicker.addEventListener('change', changeColor)
 
 clearButton.addEventListener('click', e =>{
   clearGrid();
 })
-
-function clearGrid(){
-  let allCells = 0;
-  for (let i = 0; i < gridCells.length; i++){
-    allCells = i;
-    gridCells[allCells].style.backgroundColor = 'white'
-  }
-}
 
 window.onload = () => {
   setGrid(size);
