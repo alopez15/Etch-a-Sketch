@@ -1,13 +1,16 @@
 const gridContainer = document.querySelector("#grid-container");
-const clearButton = document.querySelector("#clear-button")
-const gridCells = document.querySelector('#grid-container').getElementsByTagName('div')
-const colorPicker = document.querySelector('#color-picker')
-const rainbowBtn = document.querySelector('#rainbow-button')
+const clearButton = document.querySelector("#clear-button");
+const gridCells = document
+  .querySelector("#grid-container")
+  .getElementsByTagName("div");
+const colorPicker = document.querySelector("#color-picker");
+const rainbowBtn = document.querySelector("#rainbow-button");
 
-let size = 32;
+let size = 16;
 let penStatus = false;
-let color = 'black'
-
+let rainbowModeStatus = false;
+let colorPickerStatus = false;
+let color = "black";
 
 function setGrid(size) {
   gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
@@ -19,45 +22,60 @@ function setGrid(size) {
   }
 }
 
-function clearGrid(){
-  let allCells = 0;
-  for (let i = 0; i < gridCells.length; i++){
-    allCells = i;
-    gridCells[allCells].style.backgroundColor = 'white'
+function clearGrid() {
+  for (let i = 0; i < gridCells.length; i++) {
+    gridCells[i].style.backgroundColor = "white";
   }
 }
 
-function activatePen(e) {
-  e.target.style.backgroundColor = color;
-}
-
-function changeColor(e){
-  color = e.target.value
-}
-
-function rainbowMode(){
-  let red = Math.floor((math.random() * 255))
-  let green = Math.floor((math.random() * 255))
-  let blue = Math.floor((math.random() * 255))
-}
-
-gridContainer.addEventListener("click", (e) => {
+function activatePen() {
   if (penStatus === true) {
     penStatus = false;
-    gridContainer.removeEventListener("mouseover", activatePen);
-    console.log(penStatus);
   } else {
     penStatus = true;
-    gridContainer.addEventListener("mouseover", activatePen);
-    console.log(penStatus);
+    
   }
-});
+}
 
-colorPicker.addEventListener('change', changeColor)
+function blackPen(e){
+  if(penStatus === true && rainbowModeStatus === false){
+  e.target.style.backgroundColor = color
+  }
+}
 
-clearButton.addEventListener('click', e =>{
-  clearGrid();
-})
+function activateRainbow() {
+  if (rainbowModeStatus === true) {
+    rainbowModeStatus = false;
+  } else {
+    rainbowModeStatus = true;
+  }
+}
+
+function colorPickerValue(e) {
+  color = e.target.value;
+}
+
+function rainbowMode(e) {
+  if (rainbowModeStatus === true && penStatus === true) {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+    e.target.style.backgroundColor  = `rgb(${red},${green},${blue})`;
+  }
+}
+
+
+gridContainer.addEventListener("click", activatePen)
+
+gridContainer.addEventListener("mouseover", rainbowMode)
+
+gridContainer.addEventListener("mouseover", blackPen)
+
+rainbowBtn.addEventListener("click", activateRainbow);
+
+colorPicker.addEventListener("change", colorPickerValue);
+
+clearButton.addEventListener("click", clearGrid);
 
 window.onload = () => {
   setGrid(size);
