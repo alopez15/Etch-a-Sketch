@@ -1,11 +1,36 @@
-
-#grid-container{
-    display: grid;
-    width: 500px;
-    height: 500px;
+#grid-container {
+  display: grid;
+  width: 450px;
+  height: 450px;
+  border: red inset 10px
 }
 
+#grid-container div {
+  border: solid rgb(186, 186, 186);
+  border-width: 1px;
+  background-color: white;
+}
 
-#grid-container div{
-    border: solid black;
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  margin: 2%;
+  font-family: 'Yellowtail', cursive;
+  font-size: 3em;
+  color: rgb(218, 185, 16);
+}
+
+#main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: red;
+  width: 45%;
+  border-radius: 15px;
+  border: red outset 10px;
 }

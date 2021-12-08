@@ -8,7 +8,7 @@ const rainbowBtn = document.querySelector("#rainbow-button");
 const gridSlider = document.querySelector('#grid-slider')
 const sliderValue = document.querySelector('#slider-value')
 
-let gridSize = 10;
+let gridSize = 30;
 let penStatus = false;
 let rainbowModeStatus = false;
 let color = "black";
@@ -22,6 +22,19 @@ function setGrid(size) {
     gridContainer.append(gridDiv);
   }
 }
+
+function displayRange(){
+  sliderValue.textContent = gridSlider.value
+  gridSize = gridSlider.value
+}
+
+function updateGridSize(){
+  gridContainer.innerHTML = ''
+  setGrid(gridSize);
+  clearGrid();
+  console.log(` grid ${gridSize}`)
+}
+
 
 function clearGrid() {
   for (let i = 0; i < gridCells.length; i++) {
@@ -65,20 +78,7 @@ function rainbowMode(e) {
   }
 }
 
-function displayRange(){
-  sliderValue.textContent = gridSlider.value
-  gridSize = gridSlider.value
-}
 
-function updateGridSize(){
-  setGrid(gridSize);
-  clearGrid();
-  console.log(` grid ${gridSize}`)
-}
-
-gridSlider.addEventListener('change', updateGridSize)
-
-gridSlider.addEventListener('input', displayRange)
 
 gridContainer.addEventListener("click", activatePen)
 
@@ -91,6 +91,10 @@ rainbowBtn.addEventListener("click", activateRainbow);
 colorPicker.addEventListener("change", colorPickerValue);
 
 clearButton.addEventListener("click", clearGrid);
+
+gridSlider.addEventListener('change', updateGridSize)
+
+gridSlider.addEventListener('input', displayRange)
 
 window.onload = () => {
   setGrid(gridSize);
